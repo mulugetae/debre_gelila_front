@@ -46,7 +46,10 @@ import {
   faSquare,
   faEdit,
   faCheck,
-  faEllipsisV
+  faEllipsisV,
+  faArrowLeft,
+  faArrowRight,
+  faUserCheck
 } from "@fortawesome/free-solid-svg-icons"
 
 library.add(
@@ -94,6 +97,9 @@ library.add(
   faSquare,
   faEdit,
   faCheck,
-  faEllipsisV
+  faEllipsisV,
+  faArrowLeft,
+  faArrowRight,
+  faUserCheck
 )
 Vue.component("fa", FontAwesomeIcon)

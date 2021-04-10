@@ -268,5 +268,17 @@ export default {
     props: {
       icon: "ellipsis-v"
     }
+  },
+  back: {
+    component: "fa",
+    props: {
+      icon: "arrow-left"
+    }
+  },
+  check: {
+    component: "fa",
+    props: {
+      icon: "user-check"
+    }
   }
 }

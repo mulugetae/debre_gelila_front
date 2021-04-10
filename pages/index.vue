@@ -42,7 +42,7 @@ export default {
         {
           title: "Basic",
           icon: "$vuetify.icons.book",
-          to: "/app/basic/dashboard",
+          to: "/app/basic",
           desc: "Basic Data",
           role: "core:admin"
         },
@@ -50,7 +50,7 @@ export default {
         {
           title: "payment",
           icon: "$vuetify.icons.briefcase",
-          to: "/app/jobs/dashboard",
+          to: "/app/payment",
           desc: "",
           role: "core:approver"
         },
@@ -64,7 +64,7 @@ export default {
 
         {
           title: "Users",
-          icon: "$vuetify.icons.user",
+          icon: "$vuetify.icons.users",
           to: "/app/users/users",
           desc: "Manage Core Users",
           role: "core:admin"
