@@ -1,6 +1,7 @@
 <template nuxt>
 <v-app>
   <v-data-table
+    loading
     :headers="headers"
     :items="desserts"
     sort-by="calories"
@@ -10,7 +11,7 @@
       <v-toolbar
         flat
       >
-        <v-toolbar-title>My CRUD</v-toolbar-title>
+        <v-toolbar-title>All User list</v-toolbar-title>
         <v-divider
         color="primary"
           class="mx-4"
@@ -22,8 +23,11 @@
               color="primary"
               class="mb-2" 
               to="basic/create"
+              
             >
-              New Item
+            <v-icon left dark> $vuetify.icons.plus
+            </v-icon>
+              Create User
             </v-btn>
           
         <v-dialog v-model="dialogDelete" max-width="500px">
@@ -72,15 +76,15 @@
       dialogDelete: false,
       headers: [
         {
-          text: 'Dessert (100g serving)',
+          text: 'Full name',
           align: 'start',
           sortable: false,
           value: 'name',
         },
-        { text: 'Calories', value: 'calories' },
-        { text: 'Fat (g)', value: 'fat' },
-        { text: 'Carbs (g)', value: 'carbs' },
-        { text: 'Protein (g)', value: 'protein' },
+        { text: 'Id', value: 'calories' },
+        { text: 'Ye nesha abat', value: 'fat' },
+        { text: 'Family mebers', value: 'carbs' },
+        { text: 'Specific location', value: 'protein' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       desserts: [],
@@ -123,76 +127,7 @@
     methods: {
       initialize () {
         this.desserts = [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-          },
+          
         ]
       },
 

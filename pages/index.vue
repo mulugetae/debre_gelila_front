@@ -2,9 +2,14 @@
 <v-app>
    <v-main>
   <v-container class="pa-4 text-center">
+    <v-row>
+    <v-img src="./img/eotc.png" :aspect-ratio="5.0" contain />
+    </v-row>
     <v-row class="fill-height"
       align="center"
-      justify="center">
+      justify="center"
+      >
+      
       <template v-for="(m, i) in modules" >
         <v-col cols="12" sm="3" :key="i">
           <v-hover v-slot="{ hover }">
@@ -13,7 +18,7 @@
               :to="m.to"
               hover
               nuxt
-            height="250">
+            height="300">
               <v-card-text class="text-center">
                 <v-icon size="50" color="primary" class="mb-4">{{
                   m.icon
@@ -51,7 +56,7 @@ export default {
           title: "payment",
           icon: "$vuetify.icons.briefcase",
           to: "/app/payment",
-          desc: "",
+          desc: "payment",
           role: "core:approver"
         },
 
