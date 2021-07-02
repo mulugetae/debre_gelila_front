@@ -18,7 +18,7 @@
               :to="m.to"
               hover
               nuxt
-            height="300">
+            >
               <v-card-text class="text-center">
                 <v-icon size="50" color="primary" class="mb-4">{{
                   m.icon
