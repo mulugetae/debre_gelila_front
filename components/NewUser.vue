@@ -66,9 +66,36 @@
                 >
                 </v-autocomplete>
               </v-col>
-              <v-col cols="6" sm="3">
-                <v-btn v-if="MaritialStatus === 'married'">test</v-btn>
-              </v-col>
+              <v-row v-if="MaritialStatus === 'married'">
+                <v-col cols="6" sm="3">
+                  <v-text-field v-model="Maried.Fullname" label="Full Name " outlined>
+                  </v-text-field>
+                </v-col>
+                <v-col cols="6" sm="3">
+                  <v-text-field
+                    v-model="Maried.GrandFathername"
+                    label="Grand Father Name "
+                    outlined
+                  >
+                  </v-text-field>
+                </v-col>
+                <v-col cols="6" sm="3">
+                  <v-text-field
+                    v-model="Maried.Kersetenaname"
+                    label="Kersetena Name"
+                    outlined
+                  >
+                  </v-text-field>
+                </v-col>
+                <v-col cols="6" sm="1">
+                  <v-text-field v-model="Maried.Age" label="Age" outlined>
+                  </v-text-field>
+                </v-col>
+                <v-col cols="6" sm="2">
+                  <v-text-field v-model="Maried.Job" label="job" outlined>
+                  </v-text-field>
+                </v-col>
+              </v-row>
             </v-row>
           </v-form>
 
@@ -214,14 +241,10 @@
               <v-col cols="3" sm="3">
                 <v-text-field label="yebet kuter " outlined> </v-text-field>
               </v-col>
-              <v-col
-                cols="6"
-                sm="3"
-                v-for="item in familymeberesAray"
-                :key="item.FullName"
-              >
+              <v-col cols="6" sm="3" v-if="familymeberesAray.length >= 1">
                 <v-chip
-                  v-if="familymeberesAray.length >= 1"
+                  v-for="item in familymeberesAray"
+                  :key="item.FullName"
                   class="ma-2"
                   close
                   color="orange"
@@ -229,7 +252,7 @@
                   outlined
                   @click:close="chip4 = false"
                 >
-                  {item.FullName}
+                  {{item.FullName}}
                 </v-chip>
               </v-col>
             </v-row>
@@ -285,6 +308,13 @@ export default {
         Sex: "",
         Job: ""
       },
+      Maried:{
+        Fullname:'',
+        GrandFathername:'',
+        Kersetenaname:"",
+        Age:"",
+        Job:"",
+      },
       items: ["kebede ", "abebe", "sebuh", "mulugeta"],
       YensehaAbate_Name: null,
       City: "",
@@ -310,7 +340,7 @@ export default {
     },
     Save() {
       this.familymeberesAray.push(this.familymeberes);
-      console.log(this.familymeberesAray.FullName)
+      console.log(this.familymeberesAray.FullName);
       this.close();
     },
     done() {

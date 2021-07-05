@@ -63,14 +63,14 @@ export default {
         {
           title: "Services",
           icon: "$vuetify.icons.cogs",
-          to: "/app/services/users",
+          to: "/app/Services",
           desc: "Services"
         },
 
         {
           title: "Users",
           icon: "$vuetify.icons.users",
-          to: "/app/users/users",
+          to: "/app/users",
           desc: "Manage Core Users",
           role: "core:admin"
         }
