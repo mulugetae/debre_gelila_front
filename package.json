@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@nuxtjs/toast": "^3.3.1",
+    "axios": "^0.24.0",
     "core-js": "^3.9.1",
     "nuxt": "^2.15.3",
     "vfa-picker": "^5.9.1"

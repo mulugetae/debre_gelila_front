@@ -1,86 +1,139 @@
 <template>
-<v-app>
-   <v-main>
-  <v-container class="pa-4 text-center">
-    <v-row>
-    <v-img src="./img/eotc.png" :aspect-ratio="5.0" contain />
-    </v-row>
-    <v-row class="fill-height"
-      align="center"
-      justify="center"
-      >
-      
-      <template v-for="(m, i) in modules" >
-        <v-col cols="12" sm="3" :key="i">
-          <v-hover v-slot="{ hover }">
-            <v-card
-              :elevation="hover ? 12 : 2"
-              :to="m.to"
-              hover
-              nuxt
-            >
-              <v-card-text class="text-center">
-                <v-icon size="50" color="primary" class="mb-4">{{
-                  m.icon
-                }}</v-icon>
-                <h1 class="title text-uppercase">{{ m.title }}</h1>
-                <h2 class="subtitle-2 primary--text">{{ m.desc }}</h2>
+  
+<div id="app" >
+  <v-app id="inspire" >
+
+    <v-snackbar v-model="snackbar" :timeout="4000" top color="error">
+      <span>{{snackbarText}}</span>
+      <v-btn flat color="white" @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
+       <v-snackbar v-model="snackbar_success" :timeout="4000" top color="success">
+      <span>{{snackbar_successText}}</span>
+      <v-btn flat color="white" @click="snackbar_success = false">Close</v-btn>
+    </v-snackbar>
+
+  <v-content>
+    <v-container fluid fill-height>
+      <v-layout align-center justify-center>
+        <v-flex xs12 sm8 md4>
+
+          <v-card class="elevation-10">
+            <v-toolbar dark color="primary">
+              <v-toolbar-title v-if="login">Sign In</v-toolbar-title>
+              <v-toolbar-title v-if="!login">Welcome</v-toolbar-title>         
+              </v-toolbar>
+              <v-card-text>
+                <v-form @submit.prevent="login? signin() : signup()" id="login-form">
+                  <v-text-field prepend-icon="person" name="name" v-model="name" label="Name" type="text" :rules="nameRules" v-if="!login" ></v-text-field>
+                  <v-text-field prepend-icon="email" name="email" v-model="authBody.email" label="Email" type="text" :rules="emailRules" ></v-text-field>
+                  <v-text-field prepend-icon="lock" name="password" v-model="authBody.password" label="Password" id="password" type="password" :rules="passwordRules" ></v-text-field>
+                </v-form>
+                <p class="text-xs-center primary--text" @click="login=true;" v-if="!login"><a>Already have an account? Sign in</a></p>
+                <p class="text-xs-center primary--text" @click="login=false" v-if="login"><a>Don't have an account? Sign up</a></p>
               </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" v-if="login" type="submit" form="login-form" :loading="loading">Login</v-btn>
+                <v-btn color="primary" v-if="!login" type="submit" form="login-form" :loading="loading">Sing up</v-btn>
+              </v-card-actions>
             </v-card>
-          </v-hover>
-        </v-col>
-      </template>
-    </v-row>
-  </v-container>
- 
-      <nuxt-child />
-    </v-main>
-</v-app>
+
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
+</div>
+
 </template>
 
 <script>
+import axios from'axios';
 export default {
-  layout: "app-bar",
   data() {
     return {
-      modules: [
-        {
-          title: "Basic",
-          icon: "$vuetify.icons.book",
-          to: "/app/basic",
-          desc: "Basic Data",
-          role: "core:admin"
-        },
-
-        {
-          title: "payment",
-          icon: "$vuetify.icons.briefcase",
-          to: "/app/payment",
-          desc: "payment",
-          role: "core:approver"
-        },
-
-        {
-          title: "Services",
-          icon: "$vuetify.icons.cogs",
-          to: "/app/Services",
-          desc: "Services"
-        },
-
-        {
-          title: "Users",
-          icon: "$vuetify.icons.users",
-          to: "/app/users",
-          desc: "Manage Core Users",
-          role: "core:admin"
+      authBody:{
+          email: '',
+          password: ''
+      },
+      name: '',
+      loading: false,
+      login: true,
+      nameRules: [ v => { 
+          return v.length >= 2 || 'Too short'
+          
         }
-      ]
-    };
+      ],
+      emailRules: [
+        value => {
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return pattern.test(value) || 'Invalid email.';
+        }
+      ],
+      passwordRules: [
+        value => {
+            return value.length >= 5 || 'Too short.';
+          }
+      ],
+      snackbar: false,
+      snackbarText: '',
+      snackbar_success: false,
+      snackbar_successText: '',
+    }
   },
-  head() {
-    return {
-      title: "Dashbord"
-    };
+  methods: {
+    signup() {
+      if(this.name.length >= 2) {
+        this.loading = true;
+    axios.post('http://localhost:3000/api/Users/',{
+      name:this.name,
+      email:this.authBody.email,
+      password:this.authBody.password
+
+    })
+         .then(res =>{
+         this.snackbar_successText = 'Registered Sucessfully';
+         this.snackbar_success = true;
+         this.loading = false;
+         this.login =true;
+         })
+         .catch(err =>{
+        this.snackbarText = 'Error occured Try again!';
+         this.snackbar = true;
+         this.loading = false;
+         this.authBody.password = '';
+
+         });
+      } else {
+        this.snackbarText = 'Name too short'
+        this.snackbar = true;
+      }
+    },
+
+  signin() {
+    this.loading = true;
+    axios.post('http://localhost:3000/api/Users/login/',this.authBody)
+         .then(res =>{
+          localStorage.setItem('access_token',res.data.id);
+          localStorage.setItem('user_id',res.data.userId);
+         this.$router.replace({path:'/app'})
+         this.loading = false;
+         })
+         .catch(err =>{
+        this.snackbarText = 'Error occured Try again!';
+         this.snackbar = true;
+         this.loading = false;
+         this.authBody.password = '';
+
+         });
   }
-};
+}
+}
 </script>
+<style>
+  @media only screen and (max-width: 768px) {
+    .v-content {
+      margin: 0;
+    }
+  }
+</style>

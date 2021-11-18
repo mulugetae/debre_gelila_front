@@ -3,10 +3,10 @@
     <v-stepper v-model="e1">
       <v-stepper-header>
         <v-stepper-step :complete="e1 > 1" step="1">
-          Personal Information
+          የ ግል መረጃ
         </v-stepper-step>
         <v-stepper-step :complete="e1 > 2" step="2">
-          Location And Family Information
+          አድራሻ እና የቤተሰብ መረጃ
         </v-stepper-step>
       </v-stepper-header>
 
@@ -15,22 +15,24 @@
           <v-form ref="form_one">
             <v-row>
               <v-col cols="6" sm="12">
+              </v-col>
+              <v-col cols="6" sm="12">
                 <v-autocomplete
                   v-model="YensehaAbate_Name"
                   :items="items"
                   dense
                   outlined
-                  label="NesehaAbat"
+                  label="የ ንስሀ አባት"
                 ></v-autocomplete>
               </v-col>
               <v-col cols="6" sm="3">
-                <v-text-field v-model="Fullname" label="Full Name " outlined>
+                <v-text-field v-model="Fullname" label="ሙሉ ስም" outlined>
                 </v-text-field>
               </v-col>
               <v-col cols="6" sm="3">
                 <v-text-field
                   v-model="GrandFathername"
-                  label="Grand Father Name "
+                  label="የ አያት ስም"
                   outlined
                 >
                 </v-text-field>
@@ -38,43 +40,43 @@
               <v-col cols="6" sm="3">
                 <v-text-field
                   v-model="Kersetenaname"
-                  label="Kersetena Name"
+                  label="ክርስትና ስም"
                   outlined
                 >
                 </v-text-field>
               </v-col>
               <v-col cols="6" sm="1">
-                <v-text-field v-model="Age" label="Age" outlined>
+                <v-text-field v-model="Age" label="እድሜ" outlined>
                 </v-text-field>
               </v-col>
               <v-col cols="6" sm="2">
-                <v-text-field v-model="Job" label="job" outlined>
+                <v-text-field v-model="Job" label="ስራ" outlined>
                 </v-text-field>
               </v-col>
               <v-col cols="6" sm="3">
                 <v-autocomplete
                   :items="['female', 'male']"
-                  label="sex"
+                  label="ጻታ"
                   v-model="Sex"
                 ></v-autocomplete>
               </v-col>
               <v-col cols="6" sm="3">
                 <v-autocomplete
                   :items="['single', 'married']"
-                  label="Maritial status"
+                  label="የ ጋብቻ ሁኔታ"
                   v-model="MaritialStatus"
                 >
                 </v-autocomplete>
               </v-col>
               <v-row v-if="MaritialStatus === 'married'">
                 <v-col cols="6" sm="3">
-                  <v-text-field v-model="Maried.Fullname" label="Full Name " outlined>
+                  <v-text-field v-model="Maried.Fullname" label="ሙሉ ስም" outlined>
                   </v-text-field>
                 </v-col>
                 <v-col cols="6" sm="3">
                   <v-text-field
                     v-model="Maried.GrandFathername"
-                    label="Grand Father Name "
+                    label="የ አያት ስም "
                     outlined
                   >
                   </v-text-field>
@@ -82,17 +84,17 @@
                 <v-col cols="6" sm="3">
                   <v-text-field
                     v-model="Maried.Kersetenaname"
-                    label="Kersetena Name"
+                    label="ክርስትና ስም"
                     outlined
                   >
                   </v-text-field>
                 </v-col>
                 <v-col cols="6" sm="1">
-                  <v-text-field v-model="Maried.Age" label="Age" outlined>
+                  <v-text-field v-model="Maried.Age" label="እድሜ" outlined>
                   </v-text-field>
                 </v-col>
-                <v-col cols="6" sm="2">
-                  <v-text-field v-model="Maried.Job" label="job" outlined>
+                <v-col cols="6" sm="1">
+                  <v-text-field v-model="Maried.Job" label="ስራ" outlined>
                   </v-text-field>
                 </v-col>
               </v-row>
@@ -114,7 +116,7 @@
               <v-col cols="3" sm="3">
                 <v-autocomplete
                   :items="['Addis Abeba']"
-                  label="city"
+                  label="ከተማ"
                   v-model="City"
                   outlined
                 >
@@ -123,7 +125,7 @@
               <v-col cols="3" sm="3">
                 <v-autocomplete
                   :items="['Addis Ketema Kefele Ketema']"
-                  label="Subcity"
+                  label="ክፍለ ከተማ"
                   v-model="SubCity"
                   outlined
                 >
@@ -134,7 +136,7 @@
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn color="primary" dark v-bind="attrs" v-on="on">
                       <v-icon left dark> $vuetify.icons.plus</v-icon>
-                      add family members
+                      የቤተሰብ አባላት
                     </v-btn>
                   </template>
                   <v-card>
@@ -147,14 +149,14 @@
                           <v-row>
                             <v-col cols="12" sm="6" md="4">
                               <v-text-field
-                                label="Full Name"
+                                label="ሙሉ ስም"
                                 v-model="familymeberes.FullName"
                                 required
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6" md="4">
                               <v-text-field
-                                label="Kerestena Name"
+                                label="ክርስትና ስም"
                                 v-model="familymeberes.KerestenaName"
                               ></v-text-field>
                             </v-col>
@@ -199,14 +201,14 @@
                             </v-col>
                             <v-col cols="12">
                               <v-text-field
-                                label="Job"
+                                label="ስራ"
                                 v-model="familymeberes.Job"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="6">
                               <v-col cols="12">
                                 <v-text-field
-                                  label="Age"
+                                  label="እድሜ"
                                   v-model="familymeberes.Age"
                                 ></v-text-field>
                               </v-col>
@@ -215,7 +217,7 @@
                               <v-autocomplete
                                 :items="['female', 'male']"
                                 v-model="familymeberes.Sex"
-                                label="sex"
+                                label="ጻታ"
                               ></v-autocomplete>
                             </v-col>
                           </v-row>
@@ -236,10 +238,10 @@
               </v-col>
 
               <v-col cols="3" sm="3">
-                <v-text-field label="woreda " outlined> </v-text-field>
+                <v-text-field label="ወረዳ " outlined> </v-text-field>
               </v-col>
               <v-col cols="3" sm="3">
-                <v-text-field label="yebet kuter " outlined> </v-text-field>
+                <v-text-field label="የ ቤት ቁጥር" outlined> </v-text-field>
               </v-col>
               <v-col cols="6" sm="3" v-if="familymeberesAray.length >= 1">
                 <v-chip
@@ -273,6 +275,7 @@
 </template>
 <script>
 import Home from "./Home.vue";
+import {user} from "./interface"
 export default {
   components: { Home },
   data() {
@@ -346,6 +349,7 @@ export default {
     done() {
       console.log(this.Fullname);
       console.log(this.MaritialStatus);
+      console.log(this.Maried);
       console.log(this.familymeberesAray);
       this.$router.replace("/app/basic");
     }
